@@ -89,11 +89,37 @@ void pruebas_lista_elementos(){
 
 }
 
+void pruebas_lista_apilar(){
+    printf("INICIO DE PRUEBAS LISTA APILAR\n");
+
+    /* Declaro las variables a utilizar*/
+    lista_t* lista = lista_crear();
+    int a = 1, b = 2, c = 3, d = 4;
+
+    /* Inicio de pruebas */
+    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &a) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &b) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &c) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &d) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 4);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+}
+
 int main(){
    pruebas_lista_crear();
    pruebas_lista_insertar();
    pruebas_lista_insertar_en_posisicion();
    pruebas_lista_vacia();
    pruebas_lista_elementos();
+   pruebas_lista_apilar();
    return 0;
 }

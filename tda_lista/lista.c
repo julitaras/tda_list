@@ -128,5 +128,26 @@ void* lista_ultimo(lista_t* lista){
 int lista_apilar(lista_t* lista, void* elemento){
     //LIFO Last In First Out
     //Se apila siempre al final por lo que seria como insertar normal ya que siempre insertamos al final
+
+    return lista_insertar(lista, elemento);
 }
 
+int lista_desapilar(lista_t* lista){
+    //Tengo que sacar el ultimo de la pila primero 
+
+    if (!lista){
+        return -1;
+    }
+    if (lista_vacia(lista)){
+        return -1;
+    }
+
+    for (int i = 0; i < lista->cantidad && lista->inicio->siguiente != NULL; i++){
+        lista->inicio->siguiente;
+    }
+    
+
+    lista->cantidad --;
+
+
+}
