@@ -238,6 +238,19 @@ void pruebas_lista_borrar_de_posicion(){
 
     print_test("Se borra un elemento en la posicion 0 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
     print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
+    print_test("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &d);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
+    print_test("La lista le queda solo un elemento", lista_elementos(lista) == 1);
+    print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
+    print_test("La lista quedo vacia", lista_vacia(lista));
 }
 
 /*Revisar que prubas faltan*/

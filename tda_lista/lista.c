@@ -121,27 +121,47 @@ int lista_borrar(lista_t* lista){
     return 0;
 }
 
+/*Devuelve el nodo en la posicion indicada. Siendo 0 el primer nodo. Si la posicion no existe, devuelve NULL*/
+nodo_t* lista_nodo_en_posicion(lista_t* lista, size_t posicion){
+
+    if (!lista || lista_vacia(lista) || posicion > lista->cantidad){
+        return NULL;
+    }
+
+    nodo_t * nodo_buscado = lista->inicio;
+
+    for (int i = 0; i < posicion && nodo_buscado != NULL; i++) {
+        nodo_buscado = nodo_buscado->siguiente;
+    }
+
+    return nodo_buscado;
+}
+
 int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
 
     if (!lista || lista_vacia(lista)){
         return -1;
     }
 
-    if(posicion > lista->cantidad){
+    if(posicion >= lista->cantidad - 1){
         return lista_borrar(lista);
     }
 
-    nodo_t * nodo_eliminar = lista->fin;
+    nodo_t * nodo_eliminar = lista_nodo_en_posicion(lista, posicion);
 
-    nodo_t **nuevo_fin = &lista->inicio;
+    if (posicion == 0){
+        lista->inicio = nodo_eliminar->siguiente;
+    }
+    else{
+        nodo_t **nuevo_siguiente = &lista->inicio;
+        
+        for (int i = 0; i < posicion - 1 && *nuevo_siguiente != NULL; i++) {
+            nuevo_siguiente = &(*nuevo_siguiente)->siguiente;
+        }   
+    
+        (*nuevo_siguiente)->siguiente = nodo_eliminar->siguiente;
+    }
 
-    for (int i = 1; i < posicion && *nuevo_fin != NULL; i++) {
-        nuevo_fin = &(*nuevo_fin)->siguiente;
-    }    
-
-
-    //Que pasa en el caso de que la poscion sea 0 ? Debo cambiar el inicio. Chequear esta func
-    lista->fin = *nuevo_fin;
     lista->cantidad --;
 
     free(nodo_eliminar);
@@ -211,18 +231,18 @@ void* lista_primero(lista_t* lista){
     return lista->inicio->dato;
 }
 
-int lista_encolar(lista_t* lista, void* elemento){
+// int lista_encolar(lista_t* lista, void* elemento){
 
-    if (!lista || lista_vacia(lista)){
-        return -1;
-    }
-}
+//     if (!lista || lista_vacia(lista)){
+//         return -1;
+//     }
+// }
 
-int lista_desencolar(lista_t* lista){
+// int lista_desencolar(lista_t* lista){
 
-    if (!lista || lista_vacia(lista)){
-        return -1;
-    }
-}
+//     if (!lista || lista_vacia(lista)){
+//         return -1;
+//     }
+// }
 
 /*Revisar func que faltan, + iteradores*/
