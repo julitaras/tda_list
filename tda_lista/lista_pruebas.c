@@ -114,6 +114,39 @@ void pruebas_lista_apilar(){
     print_test("La lista no esta vacia", !lista_vacia(lista));
 }
 
+void pruebas_lista_desapilar(){
+    printf("INICIO DE PRUEBAS LISTA DESAPILAR\n");
+
+    /* Declaro las variables a utilizar*/
+    lista_t* lista = lista_crear();
+    int a = 1, b = 2, c = 3;
+
+    /* Inicio de pruebas */
+    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &a) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se apila un elemento a la lista", lista_apilar(lista, &b) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se apila un elemento a la lista", lista_apilar(lista, &c) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
+    print_test("La lista tiene un elemento menos", lista_elementos(lista) == 2);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
+    print_test("La lista tiene un elemento menos", lista_elementos(lista) == 1);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
+    print_test("La lista esta vacia", lista_vacia(lista));
+
+}
+
 int main(){
    pruebas_lista_crear();
    pruebas_lista_insertar();
@@ -121,5 +154,6 @@ int main(){
    pruebas_lista_vacia();
    pruebas_lista_elementos();
    pruebas_lista_apilar();
+   pruebas_lista_desapilar();
    return 0;
 }

@@ -99,6 +99,40 @@ int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion){
     return 0;
 }
 
+int lista_borrar(lista_t* lista){
+
+    if (!lista || lista_vacia(lista)){
+        return -1;
+    }
+
+    nodo_t * nodo_eliminar = lista->fin;
+
+    nodo_t **nuevo_fin = &lista->inicio;
+
+    for (int i = 1; i < lista->cantidad - 1 && *nuevo_fin != NULL; i++) {
+        nuevo_fin = &(*nuevo_fin)->siguiente;
+    }    
+
+    lista->fin = *nuevo_fin;
+    lista->cantidad --;
+
+    free(nodo_eliminar);
+
+    return 0;
+}
+
+int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
+
+    if (!lista || lista_vacia(lista)){
+        return -1;
+    }
+
+    if(posicion > lista_elementos(lista)){
+        return lista_borrar(lista);
+    }
+    
+}
+
 bool lista_vacia(lista_t* lista){
     if (lista_elementos(lista) == 0){
         return true;
@@ -126,28 +160,25 @@ void* lista_ultimo(lista_t* lista){
 }
 
 int lista_apilar(lista_t* lista, void* elemento){
-    //LIFO Last In First Out
-    //Se apila siempre al final por lo que seria como insertar normal ya que siempre insertamos al final
-
     return lista_insertar(lista, elemento);
 }
 
 int lista_desapilar(lista_t* lista){
-    //Tengo que sacar el ultimo de la pila primero 
+    return lista_borrar(lista);
+}
 
-    if (!lista){
-        return -1;
+void* lista_tope(lista_t* lista){
+    if (!lista || lista_vacia(lista)){
+        return NULL;
     }
-    if (lista_vacia(lista)){
-        return -1;
+
+    return lista->fin->dato;
+}
+
+void* lista_primero(lista_t* lista){
+       if (!lista || lista_vacia(lista)){
+        return NULL;
     }
 
-    for (int i = 0; i < lista->cantidad && lista->inicio->siguiente != NULL; i++){
-        lista->inicio->siguiente;
-    }
-    
-
-    lista->cantidad --;
-
-
+    return lista->inicio->dato;
 }
