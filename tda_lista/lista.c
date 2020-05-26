@@ -231,18 +231,23 @@ void* lista_primero(lista_t* lista){
     return lista->inicio->dato;
 }
 
-// int lista_encolar(lista_t* lista, void* elemento){
+int lista_encolar(lista_t* lista, void* elemento){
 
-//     if (!lista || lista_vacia(lista)){
-//         return -1;
-//     }
-// }
+    //Estructura FIFO, first in, first out
+    if (!lista){
+        return -1;
+    }
 
-// int lista_desencolar(lista_t* lista){
+    return lista_insertar_en_posicion(lista, elemento, 0);
+}
 
-//     if (!lista || lista_vacia(lista)){
-//         return -1;
-//     }
-// }
+int lista_desencolar(lista_t* lista){
+
+    if (!lista || lista_vacia(lista)){
+        return -1;
+    }
+
+    return lista_borrar_de_posicion(lista, 0);
+}
 
 /*Revisar func que faltan, + iteradores*/

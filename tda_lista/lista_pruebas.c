@@ -209,7 +209,7 @@ void pruebas_lista_elemento_en_posicion(){
 }
 
 void pruebas_lista_borrar_de_posicion(){
-     printf("INICIO DE PRUEBAS LISTA BORRAR ELEMENTO EN POSICION\n");
+    printf("INICIO DE PRUEBAS LISTA BORRAR ELEMENTO EN POSICION\n");
 
     /* Declaro las variables a utilizar*/
     lista_t* lista = lista_crear();
@@ -253,6 +253,46 @@ void pruebas_lista_borrar_de_posicion(){
     print_test("La lista quedo vacia", lista_vacia(lista));
 }
 
+
+void pruebas_lista_encolar(){
+    printf("INICIO DE PRUEBAS LISTA ENCOLAR\n");
+
+    /* Declaro las variables a utilizar*/
+    lista_t* lista = lista_crear();
+    int a = 1, b = 2, c = 3, d = 4;
+
+    /* Inicio de pruebas */
+    print_test("Se encola un elemento a la lista", lista_encolar(lista, &a) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    print_test("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &b);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    print_test("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &c);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+
+    print_test("Se encola un elemento a la lista", lista_encolar(lista, &d) == 0);
+    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 4);
+    print_test("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &d);
+    print_test("La lista no esta vacia", !lista_vacia(lista));
+}
+
+// void pruebas_lista_desencolar(){
+//     printf("INICIO DE PRUEBAS LISTA DESENCOLAR\n");
+
+//     /* Declaro las variables a utilizar*/
+//     lista_t* lista = lista_crear();
+//     int a = 1, b = 2, c = 3, d = 4;
+
+//     /* Inicio de pruebas */
+// }
+
 /*Revisar que prubas faltan*/
 
 int main(){
@@ -266,5 +306,6 @@ int main(){
    pruebas_lista_borrar();
    pruebas_lista_elemento_en_posicion();
    pruebas_lista_borrar_de_posicion();
+   pruebas_lista_encolar();
    return 0;
 }
