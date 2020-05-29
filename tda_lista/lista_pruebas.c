@@ -14,9 +14,10 @@ void pruebas_lista_crear() {
     lista_t* lista = lista_crear();
 
     /* Inicio de pruebas */
-    print_test("La lista se creo con exito", lista != NULL);
-    print_test("La lista esta vacia", lista_vacia(lista));
-    print_test("La lista tiene 0 elementos", lista_elementos(lista) == 0);
+    prueba("La lista se creo con exito", lista != NULL);
+    prueba("La lista esta vacia", lista_vacia(lista));
+    prueba("La lista tiene 0 elementos", lista_elementos(lista) == 0);
+    lista_destruir(lista);
 }
 
 void pruebas_lista_insertar(){
@@ -27,21 +28,22 @@ void pruebas_lista_insertar(){
     int a = 1, b = 2, c = 3, d = 4;
 
     /* Inicio de pruebas */
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+    lista_destruir(lista);
 }
 
 void pruebas_lista_insertar_en_posisicion(){
@@ -52,17 +54,22 @@ void pruebas_lista_insertar_en_posisicion(){
     int a = 1, b = 2, c = 3;
 
     /* Inicio de pruebas */
-    print_test("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &a, 0) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &a, 0) == 0);
+    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    prueba("Elemento en posicion 0", lista_primero(lista) == &a);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &b, 1) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &b, 1) == 0);
+    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &c, 1) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &c, 2) == 0);
+    prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+    lista_destruir(lista);
 }
 
 void pruebas_lista_vacia(){
@@ -72,9 +79,9 @@ void pruebas_lista_vacia(){
     lista_t* lista = lista_crear();
 
     /* Inicio de pruebas */
-    print_test("La lista esta vacia", lista_vacia(lista));
-    print_test("Envio una lista NULL", lista_vacia(NULL));
-
+    prueba("La lista esta vacia", lista_vacia(lista));
+    prueba("Envio una lista NULL", lista_vacia(NULL));
+    lista_destruir(lista);
 }
 
 void pruebas_lista_elementos(){
@@ -84,9 +91,9 @@ void pruebas_lista_elementos(){
     lista_t* lista = lista_crear();
 
     /* Inicio de pruebas */
-    print_test("La lista esta vacia", lista_elementos(lista) == 0);
-    print_test("La lista es NULL", lista_elementos(NULL) == 0);
-
+    prueba("La lista esta vacia", lista_elementos(lista) == 0);
+    prueba("La lista es NULL", lista_elementos(NULL) == 0);
+    lista_destruir(lista);
 }
 
 void pruebas_lista_apilar(){
@@ -97,21 +104,22 @@ void pruebas_lista_apilar(){
     int a = 1, b = 2, c = 3, d = 4;
 
     /* Inicio de pruebas */
-    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &a) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_apilar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &b) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_apilar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &c) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_apilar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &d) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_apilar(lista, &d) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+    lista_destruir(lista);
 }
 
 void pruebas_lista_desapilar(){
@@ -122,28 +130,29 @@ void pruebas_lista_desapilar(){
     int a = 1, b = 2, c = 3;
 
     /* Inicio de pruebas */
-    print_test("Se inserta un elemento a la lista", lista_apilar(lista, &a) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_apilar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se apila un elemento a la lista", lista_apilar(lista, &b) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se apila un elemento a la lista", lista_apilar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se apila un elemento a la lista", lista_apilar(lista, &c) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se apila un elemento a la lista", lista_apilar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
-    print_test("La lista tiene un elemento menos", lista_elementos(lista) == 2);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
+    prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
-    print_test("La lista tiene un elemento menos", lista_elementos(lista) == 1);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
+    prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
-    print_test("La lista esta vacia", lista_vacia(lista));
+    prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
+    prueba("La lista esta vacia", lista_vacia(lista));
+    lista_destruir(lista);
 }
 
 void pruebas_lista_borrar(){
@@ -154,28 +163,29 @@ void pruebas_lista_borrar(){
     int a = 1, b = 2, c = 3;
 
     /* Inicio de pruebas */
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento a la lista", lista_borrar(lista) == 0);
-    print_test("La lista tiene un elemento menos", lista_elementos(lista) == 2);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
+    prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento a la lista", lista_borrar(lista) == 0);
-    print_test("La lista tiene un elemento menos", lista_elementos(lista) == 1);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
+    prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento a la lista", lista_borrar(lista) == 0);
-    print_test("La lista esta vacia", lista_vacia(lista));
+    prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
+    prueba("La lista esta vacia", lista_vacia(lista));
+    lista_destruir(lista);
 }
 
 void pruebas_lista_elemento_en_posicion(){
@@ -186,26 +196,27 @@ void pruebas_lista_elemento_en_posicion(){
     int a = 1, b = 2, c = 3;
 
     /* Inicio de pruebas */
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento a la lista", lista_borrar(lista) == 0);
-    print_test("La lista tiene un elemento menos", lista_elementos(lista) == 2);
-    print_test("No hay elemento en posicion 2", !(lista_elemento_en_posicion(lista, 2) == &c));
-    print_test("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
+    prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
+    prueba("No hay elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == NULL);
+    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+    lista_destruir(lista);
 }
 
 void pruebas_lista_borrar_de_posicion(){
@@ -216,41 +227,42 @@ void pruebas_lista_borrar_de_posicion(){
     int a = 1, b = 2, c = 3, d = 4;
 
     /* Inicio de pruebas */
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    print_test("Elemento en posicion 3", lista_elemento_en_posicion(lista, 3) == &d);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
+    prueba("Elemento en posicion 3", lista_elemento_en_posicion(lista, 3) == &d);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento en la posicion 0 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
-    print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se borra un elemento en la posicion 0 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
+    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
-    print_test("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &d);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
+    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &d);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
-    print_test("La lista le queda solo un elemento", lista_elementos(lista) == 1);
-    print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
+    prueba("La lista le queda solo un elemento", lista_elementos(lista) == 1);
+    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
-    print_test("La lista quedo vacia", lista_vacia(lista));
+    prueba("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
+    prueba("La lista quedo vacia", lista_vacia(lista));
+    lista_destruir(lista);
 }
 
 
@@ -259,39 +271,61 @@ void pruebas_lista_encolar(){
 
     /* Declaro las variables a utilizar*/
     lista_t* lista = lista_crear();
+    int a = 1, b = 2, c = 3;
+
+    /* Inicio de pruebas */
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+
+
+    prueba("El ultio elemento que se inserto es el primero", lista_elemento_en_posicion(lista, 0) == &c);
+    prueba("El elemento que se inserto en el medio esta en el medio", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("El primer elemento que se inserto es el ultimo", lista_elemento_en_posicion(lista, 2) == &a);
+  
+    lista_destruir(lista);
+}
+
+void pruebas_lista_desencolar(){
+    printf("INICIO DE PRUEBAS LISTA DESENCOLAR\n");
+
+    /* Declaro las variables a utilizar*/
+    lista_t* lista = lista_crear();
     int a = 1, b = 2, c = 3, d = 4;
 
     /* Inicio de pruebas */
-    print_test("Se encola un elemento a la lista", lista_encolar(lista, &a) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    print_test("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &a) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    print_test("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &b);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    print_test("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &c);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    print_test("Se encola un elemento a la lista", lista_encolar(lista, &d) == 0);
-    print_test("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    print_test("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &d);
-    print_test("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &d) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
+    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 3) == &d);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
+
+    prueba("Se desenencola un elemento a la lista", lista_desencolar(lista) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    lista_destruir(lista);
 }
-
-// void pruebas_lista_desencolar(){
-//     printf("INICIO DE PRUEBAS LISTA DESENCOLAR\n");
-
-//     /* Declaro las variables a utilizar*/
-//     lista_t* lista = lista_crear();
-//     int a = 1, b = 2, c = 3, d = 4;
-
-//     /* Inicio de pruebas */
-// }
 
 /*Revisar que prubas faltan*/
 
@@ -307,5 +341,6 @@ int main(){
    pruebas_lista_elemento_en_posicion();
    pruebas_lista_borrar_de_posicion();
    pruebas_lista_encolar();
+//    pruebas_lista_desencolar();
    return 0;
 }

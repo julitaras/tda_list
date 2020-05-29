@@ -66,6 +66,22 @@ int lista_insertar(lista_t* lista, void* elemento){
     return 0;
 }
 
+/*Devuelve el nodo en la posicion indicada. Siendo 0 el primer nodo. Si la posicion no existe, devuelve NULL*/
+nodo_t* lista_nodo_en_posicion(lista_t* lista, size_t posicion){
+
+    if (!lista || lista_vacia(lista) || posicion > lista->cantidad){
+        return NULL;
+    }
+
+    nodo_t * nodo_buscado = lista->inicio;
+
+    for (int i = 0; i < posicion && nodo_buscado != NULL; i++) {
+        nodo_buscado = nodo_buscado->siguiente;
+    }
+
+    return nodo_buscado;
+}
+
 int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion){
 
     if(!lista){
@@ -84,15 +100,30 @@ int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion){
 
     nodo_nuevo->dato = elemento;
 
-    nodo_t **siguiente_posicion_nodo_nuevo = &lista->inicio;
-
-    for (int i = 0; i < posicion && *siguiente_posicion_nodo_nuevo != NULL; i++) {
-        siguiente_posicion_nodo_nuevo = &(*siguiente_posicion_nodo_nuevo)->siguiente;
+    if (lista_vacia(lista)){
+        lista->inicio = nodo_nuevo;
+        lista->fin = nodo_nuevo;
+        nodo_nuevo->siguiente = NULL;
     }
+    else{
 
-    nodo_nuevo->siguiente = *siguiente_posicion_nodo_nuevo;
+        nodo_t * siguiente_nodo_nuevo = lista_nodo_en_posicion(lista, posicion);
 
-    *siguiente_posicion_nodo_nuevo = nodo_nuevo;
+        nodo_t **siguiente_nodo_viejo = &lista->inicio;
+
+        for (int i = 0; i < posicion -1 && *siguiente_nodo_viejo != NULL; i++) {
+            siguiente_nodo_viejo = &(*siguiente_nodo_viejo)->siguiente;
+        }
+
+        nodo_nuevo->siguiente = siguiente_nodo_nuevo;
+
+        if(posicion == 0){
+            *siguiente_nodo_viejo = nodo_nuevo;
+        }else{
+            (*siguiente_nodo_viejo)->siguiente = nodo_nuevo;
+            lista->fin = nodo_nuevo;
+        }
+    }
 
     lista->cantidad++;
 
@@ -114,27 +145,12 @@ int lista_borrar(lista_t* lista){
     }    
 
     lista->fin = *nuevo_fin;
+    lista->fin->siguiente = NULL;
     lista->cantidad --;
 
     free(nodo_eliminar);
 
     return 0;
-}
-
-/*Devuelve el nodo en la posicion indicada. Siendo 0 el primer nodo. Si la posicion no existe, devuelve NULL*/
-nodo_t* lista_nodo_en_posicion(lista_t* lista, size_t posicion){
-
-    if (!lista || lista_vacia(lista) || posicion > lista->cantidad){
-        return NULL;
-    }
-
-    nodo_t * nodo_buscado = lista->inicio;
-
-    for (int i = 0; i < posicion && nodo_buscado != NULL; i++) {
-        nodo_buscado = nodo_buscado->siguiente;
-    }
-
-    return nodo_buscado;
 }
 
 int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
@@ -181,7 +197,11 @@ void* lista_elemento_en_posicion(lista_t* lista, size_t posicion){
         nodo_buscado = nodo_buscado->siguiente;
     }
 
-    return nodo_buscado->dato;
+    if (nodo_buscado != NULL){
+        return nodo_buscado->dato;
+    }
+
+    return NULL;
 }
 
 bool lista_vacia(lista_t* lista){
@@ -250,4 +270,10 @@ int lista_desencolar(lista_t* lista){
     return lista_borrar_de_posicion(lista, 0);
 }
 
+void lista_destruir(lista_t* lista){
+    while (!lista_vacia(lista)) {
+		lista_borrar(lista);
+	}
+	free(lista);
+}
 /*Revisar func que faltan, + iteradores*/
