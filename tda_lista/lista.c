@@ -111,10 +111,11 @@ int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion){
 
         nodo_t **siguiente_nodo_viejo = &lista->inicio;
 
-        for (int i = 0; i < posicion -1 && *siguiente_nodo_viejo != NULL; i++) {
-            siguiente_nodo_viejo = &(*siguiente_nodo_viejo)->siguiente;
+        if (posicion > 0){
+            for (int i = 0;( i < posicion -1 && *siguiente_nodo_viejo != NULL); i++) {
+                siguiente_nodo_viejo = &(*siguiente_nodo_viejo)->siguiente;
+            }
         }
-
         nodo_nuevo->siguiente = siguiente_nodo_nuevo;
 
         if(posicion == 0){

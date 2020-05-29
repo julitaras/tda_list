@@ -271,7 +271,7 @@ void pruebas_lista_encolar(){
 
     /* Declaro las variables a utilizar*/
     lista_t* lista = lista_crear();
-    int a = 1, b = 2;
+    int a = 1, b = 2, c = 3;
 
     /* Inicio de pruebas */
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &a) == 0);
@@ -282,14 +282,14 @@ void pruebas_lista_encolar(){
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    // prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
-    // prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    // prueba("La lista no esta vacia", !lista_vacia(lista));
+    prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
+    prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("La lista no esta vacia", !lista_vacia(lista));
 
 
-    // prueba("El ultio elemento que se inserto es el primero", lista_elemento_en_posicion(lista, 0) == &c);
-    // prueba("El elemento que se inserto en el medio esta en el medio", lista_elemento_en_posicion(lista, 1) == &b);
-    // prueba("El primer elemento que se inserto es el ultimo", lista_elemento_en_posicion(lista, 2) == &a);
+    prueba("El ultio elemento que se inserto es el primero", lista_elemento_en_posicion(lista, 0) == &c);
+    prueba("El elemento que se inserto en el medio esta en el medio", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("El primer elemento que se inserto es el ultimo", lista_elemento_en_posicion(lista, 2) == &a);
   
     lista_destruir(lista);
 }
@@ -309,17 +309,17 @@ void pruebas_lista_desencolar(){
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &b);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &c);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &d) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 3) == &d);
+    prueba("Elemento en posicion", lista_elemento_en_posicion(lista, 0) == &d);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se desenencola un elemento a la lista", lista_desencolar(lista) == 0);
@@ -341,6 +341,6 @@ int main(){
    pruebas_lista_elemento_en_posicion();
    pruebas_lista_borrar_de_posicion();
    pruebas_lista_encolar();
-//    pruebas_lista_desencolar();
+   pruebas_lista_desencolar();
    return 0;
 }
