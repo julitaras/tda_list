@@ -15,6 +15,12 @@ struct lista{
     size_t cantidad;
 };
 
+/*Defino la estructura del iterador*/
+struct lista_iterador{
+    nodo_t* anterior;
+	nodo_t* actual;
+};
+
 /*Crea la estructura de nodo_t, reservando memoria para la misma*/
 nodo_t * nodo_crear(){
 
@@ -148,7 +154,10 @@ int lista_borrar(lista_t* lista){
     lista->fin = *nuevo_fin;
     lista->fin->siguiente = NULL;
     lista->cantidad --;
-
+    
+    if (lista_vacia(lista)){ 
+        lista->fin = NULL;
+    }
     free(nodo_eliminar);
 
     return 0;
@@ -177,10 +186,14 @@ int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
         }   
     
         (*nuevo_siguiente)->siguiente = nodo_eliminar->siguiente;
+
+        if(nodo_eliminar == lista->fin){
+            lista->fin =  (*nuevo_siguiente)->siguiente;   
+        }
     }
 
     lista->cantidad --;
-
+    
     free(nodo_eliminar);
 
     return 0;
@@ -206,6 +219,10 @@ void* lista_elemento_en_posicion(lista_t* lista, size_t posicion){
 }
 
 bool lista_vacia(lista_t* lista){
+    if (!lista){
+        return true;
+    }
+
     if (lista_elementos(lista) == 0){
         return true;
     }
@@ -215,7 +232,7 @@ bool lista_vacia(lista_t* lista){
 
 size_t lista_elementos(lista_t* lista){
 
-    if(lista == NULL){
+    if(!lista){
         return 0;
     }
 
@@ -253,8 +270,6 @@ void* lista_primero(lista_t* lista){
 }
 
 int lista_encolar(lista_t* lista, void* elemento){
-
-    //Estructura FIFO, first in, first out
     if (!lista){
         return -1;
     }
@@ -277,4 +292,44 @@ void lista_destruir(lista_t* lista){
 	}
 	free(lista);
 }
-/*Revisar func que faltan, + iteradores*/
+
+lista_iterador_t* lista_iterador_crear(lista_t* lista){
+
+    lista_iterador_t* it = calloc(1, sizeof(lista_iterador_t));
+
+    if(!it){
+        return NULL;
+    }
+
+    it->anterior = NULL;
+	it->actual = lista->inicio;
+	return it;
+   
+}
+
+void lista_iterador_destruir(lista_iterador_t* iterador){
+    free(iterador);
+}
+
+bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador){
+    if(!iterador){
+        return false;
+    }
+
+    if(!iterador->actual->siguiente){
+        return false;
+    }
+
+    return true;
+}
+
+void* lista_iterador_siguiente(lista_iterador_t* iterador){
+    if(!iterador || !lista_iterador_tiene_siguiente(iterador)){
+        return NULL;
+    }
+
+    iterador->anterior = iterador->actual;
+	iterador->actual = iterador->anterior->siguiente;
+
+    return iterador->anterior->dato;
+}
