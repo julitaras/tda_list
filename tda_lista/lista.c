@@ -81,7 +81,7 @@ nodo_t* lista_nodo_en_posicion(lista_t* lista, size_t posicion){
 
     nodo_t * nodo_buscado = lista->inicio;
 
-    for (int i = 0; i < posicion && nodo_buscado != NULL; i++) {
+    for (size_t i = 0; i < posicion && nodo_buscado != NULL; i++) {
         nodo_buscado = nodo_buscado->siguiente;
     }
 
@@ -118,7 +118,7 @@ int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion){
         nodo_t **siguiente_nodo_viejo = &lista->inicio;
 
         if (posicion > 0){
-            for (int i = 0;( i < posicion -1 && *siguiente_nodo_viejo != NULL); i++) {
+            for (size_t i = 0;( i < posicion -1 && *siguiente_nodo_viejo != NULL); i++) {
                 siguiente_nodo_viejo = &(*siguiente_nodo_viejo)->siguiente;
             }
         }
@@ -147,7 +147,7 @@ int lista_borrar(lista_t* lista){
 
     nodo_t **nuevo_fin = &lista->inicio;
 
-    for (int i = 1; i < lista->cantidad - 1 && *nuevo_fin != NULL; i++) {
+    for (size_t i = 1; i < lista->cantidad - 1 && *nuevo_fin != NULL; i++) {
         nuevo_fin = &(*nuevo_fin)->siguiente;
     }    
 
@@ -181,7 +181,7 @@ int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
     else{
         nodo_t **nuevo_siguiente = &lista->inicio;
         
-        for (int i = 0; i < posicion - 1 && *nuevo_siguiente != NULL; i++) {
+        for (size_t i = 0; i < posicion - 1 && *nuevo_siguiente != NULL; i++) {
             nuevo_siguiente = &(*nuevo_siguiente)->siguiente;
         }   
     
@@ -193,7 +193,7 @@ int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
     }
 
     lista->cantidad --;
-    
+
     free(nodo_eliminar);
 
     return 0;
@@ -207,7 +207,7 @@ void* lista_elemento_en_posicion(lista_t* lista, size_t posicion){
 
     nodo_t * nodo_buscado = lista->inicio;
 
-    for (int i = 0; i < posicion && nodo_buscado != NULL; i++) {
+    for (size_t i = 0; i < posicion && nodo_buscado != NULL; i++) {
         nodo_buscado = nodo_buscado->siguiente;
     }
 
@@ -332,4 +332,11 @@ void* lista_iterador_siguiente(lista_iterador_t* iterador){
 	iterador->actual = iterador->anterior->siguiente;
 
     return iterador->anterior->dato;
+}
+
+void lista_con_cada_elemento(lista_t* lista, void (*funcion)(void*, void*), void *contexto){
+
+    for (size_t i = 0; i < lista_elementos(lista); i++){
+        funcion(lista_elemento_en_posicion(lista, i), contexto);
+    }
 }
