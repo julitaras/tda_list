@@ -321,7 +321,7 @@ bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador){
         return false;
     }
 
-    if(!iterador->actual->siguiente){
+    if(!iterador->actual){
         return false;
     }
 

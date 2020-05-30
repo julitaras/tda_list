@@ -375,26 +375,29 @@ void pruebas_lista_desencolar(){
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
+    prueba("Primer elemento", lista_primero(lista) == &b);
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &c);
+    prueba("Primer elemento", lista_primero(lista) == &c);
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &d) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &d);
+    prueba("Primer elemento", lista_primero(lista) == &d);
 
-    prueba("Se desenencola un elemento a la lista", lista_desencolar(lista) == 0);
+    prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 3);
+    prueba("Primer elemento", lista_primero(lista) == &c);
 
-    prueba("Se desenencola un elemento a la lista", lista_desencolar(lista) == 0);
+    prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
+    prueba("Primer elemento", lista_primero(lista) == &b);
 
-    prueba("Se desenencola un elemento a la lista", lista_desencolar(lista) == 0);
+    prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
+    prueba("Primer elemento", lista_primero(lista) == &a);
 
-    prueba("Se desenencola un elemento a la lista", lista_desencolar(lista) == 0);
+    prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista esta vacia", lista_vacia(lista));
 
     lista_destruir(lista);
@@ -441,6 +444,52 @@ void pruebas_lista_volumen() {
     lista_destruir(lista);
 }
 
+void mostrar_elemento(void* elemento, void* contador){
+  if(elemento && contador)
+    printf("Elemento %i: %i \n", (*(int*)contador)++, *(int*)elemento);
+}
+
+void prueba_iterador(){
+
+    /* Declaro las variables a utilizar*/
+    lista_t* lista = lista_crear();
+    int a = 1, b = 2;
+
+    /* Inicio de pruebas */
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
+
+    int contador=0;
+    printf("Imprimo la lista usando el iterador interno: \n");
+    lista_con_cada_elemento(lista, mostrar_elemento, (void*)&contador);
+
+    prueba("Cantidad de iteraciones coincide con la cantidad de elementos", contador == lista_elementos(lista));
+}
+
+void prueba_iterador_externo(){
+
+    /* Declaro las variables a utilizar*/
+    lista_t* lista = lista_crear();
+    int a = 1, b = 2;
+
+    /* Inicio de pruebas */
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
+    prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
+    
+
+    lista_iterador_t* it = lista_iterador_crear(lista);
+    prueba("Iterador se crea correctamente", it != NULL);
+    prueba("Iterador tiene siguiente", lista_iterador_tiene_siguiente(it));
+    
+    prueba("Iterador siguiente", lista_iterador_siguiente(it) == &a);
+    prueba("Iterador tiene siguiente", lista_iterador_tiene_siguiente(it));
+    prueba("Iterador siguiente", lista_iterador_siguiente(it) == &b);
+    prueba("Iterador no tiene siguiente", !lista_iterador_tiene_siguiente(it));
+    
+    lista_iterador_destruir(it);
+    lista_destruir(lista);
+}
+
 int main(){
    pruebas_lista_crear();
    pruebas_lista_insertar();
@@ -458,5 +507,7 @@ int main(){
    pruebas_lista_tope();
    pruebas_lista_primero();
    pruebas_lista_volumen();
+   prueba_iterador();
+   prueba_iterador_externo();
    return 0;
 }
