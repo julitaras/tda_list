@@ -4,7 +4,7 @@
 
 Se entrega el TDA de `lista` junto con sus respectivas pruebas.
 
-Elijo implementar la lista teniendo un puntero que apunta al inicio y otro puntero que apunta al final. Y la misma, tambien se implemnta utilizando nodos simplemnete enlazados.
+Elijo implementar la lista teniendo un puntero que apunta al `inicio` y otro puntero que apunta al `final`. Y la misma, tambien se implementa utilizando `nodos simplemnete enlazados`.
 
 Siguiendo este modelo:
 
