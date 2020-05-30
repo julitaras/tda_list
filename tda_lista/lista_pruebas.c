@@ -444,12 +444,16 @@ void pruebas_lista_volumen() {
     lista_destruir(lista);
 }
 
-void mostrar_elemento(void* elemento, void* contador){
-  if(elemento && contador)
-    printf("Elemento %i: %i \n", (*(int*)contador)++, *(int*)elemento);
+void sumar_elemento(void* elemento, void* contador){
+  if(elemento && contador){
+    printf("Elemento: %i \n", *(int*)elemento);
+
+    (*(int*)contador) = (*(int*)contador) + *(int*)elemento;
+    printf("Suma hasta el momento: %i \n", *(int*)contador);
+  }
 }
 
-void prueba_iterador(){
+void prueba_iterador_interno(){
 
     /* Declaro las variables a utilizar*/
     lista_t* lista = lista_crear();
@@ -461,9 +465,9 @@ void prueba_iterador(){
 
     int contador=0;
     printf("Imprimo la lista usando el iterador interno: \n");
-    lista_con_cada_elemento(lista, mostrar_elemento, (void*)&contador);
+    lista_con_cada_elemento(lista, sumar_elemento, (void*)&contador);
 
-    prueba("Cantidad de iteraciones coincide con la cantidad de elementos", contador == lista_elementos(lista));
+    prueba("La suma de los elementos dio la cantidad correcta", contador == 3);
 }
 
 void prueba_iterador_externo(){
@@ -507,7 +511,7 @@ int main(){
    pruebas_lista_tope();
    pruebas_lista_primero();
    pruebas_lista_volumen();
-   prueba_iterador();
+   prueba_iterador_interno();
    prueba_iterador_externo();
    return 0;
 }
