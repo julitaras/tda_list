@@ -1,12 +1,27 @@
 #include <stdio.h>
-#include "pruebas.c"
 #include "lista.h"
+#include <stdbool.h>
 
-/* ******************************************************************
- *                        PRUEBAS UNITARIAS
- * *****************************************************************/
+#define COLOR_ROJO	   "\x1b[1m\x1b[31m"
+#define COLOR_VERDE   "\x1b[1m\x1b[32m"
+#define COLOR_NORMAL   "\x1b[0m"
 
-/* Pruebas para un vector de tamaño 0. */
+/*Funcion prueba, recibe el mensaje a dar 
+* y si el resultado esta bien o mal. 
+* De estar bien se pone en verde, de estar mal se pone en rojo
+*/
+void prueba(const char* mensaje, bool ok) {
+	if (ok) {
+		printf(COLOR_NORMAL "%s... ", mensaje);
+		printf(COLOR_VERDE "OK\n");
+	} else {
+		printf(COLOR_NORMAL "%s: ", mensaje);
+		printf(COLOR_ROJO "ERROR\n");
+	}
+	printf(COLOR_NORMAL);
+}
+
+/*Prueba para funcion lista_crear*/
 void pruebas_lista_crear() {
     printf("INICIO DE PRUEBAS LISTA CREAR\n");
 
@@ -20,6 +35,7 @@ void pruebas_lista_crear() {
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_insertar*/
 void pruebas_lista_insertar(){
     printf("\nINICIO DE PRUEBAS LISTA INSERTAR\n");
 
@@ -30,23 +46,26 @@ void pruebas_lista_insertar(){
     /* Inicio de pruebas */
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("El primer elemento que ingrese esta en la posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
+    prueba("El segundo elemento que ingrese esta en la posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
+    prueba("El tercer elemento que ingrese esta en la posicion 2", lista_elemento_en_posicion(lista, 0) == &c);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
+    prueba("El cuarto elemento que ingrese esta en la posicion 3", lista_elemento_en_posicion(lista, 0) == &a);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
+
     lista_destruir(lista);
 }
 
-void pruebas_lista_insertar_en_posisicion(){
+/*Prueba para funcion insertar_en_posicion*/
+void pruebas_lista_insertar_en_posicion(){
     printf("\nINICIO DE PRUEBAS LISTA INSERTAR EN POSICION\n");
 
     /* Declaro las variables a utilizar*/
@@ -63,15 +82,15 @@ void pruebas_lista_insertar_en_posisicion(){
     prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &b, 1) == 0);
     prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &c, 2) == 0);
     prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
+
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_vacia*/
 void pruebas_lista_vacia(){
     printf("\nINICIO DE PRUEBAS LISTA VACIA\n");
 
@@ -81,9 +100,11 @@ void pruebas_lista_vacia(){
     /* Inicio de pruebas */
     prueba("La lista esta vacia", lista_vacia(lista));
     prueba("Envio una lista NULL", lista_vacia(NULL));
+
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_elementos*/
 void pruebas_lista_elementos(){
     printf("\nINICIO DE PRUEBAS LISTA ELEMENTOS\n");
 
@@ -93,9 +114,11 @@ void pruebas_lista_elementos(){
     /* Inicio de pruebas */
     prueba("La lista esta vacia", lista_elementos(lista) == 0);
     prueba("La lista es NULL", lista_elementos(NULL) == 0);
+
     lista_destruir(lista);
 }
 
+/*Pruebas para funcion lista_apilar*/
 void pruebas_lista_apilar(){
     printf("\nINICIO DE PRUEBAS LISTA APILAR\n");
 
@@ -110,18 +133,17 @@ void pruebas_lista_apilar(){
 
     prueba("Se inserta un elemento a la lista", lista_apilar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_apilar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_apilar(lista, &d) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
+    
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_tope*/
 void pruebas_lista_tope(){
     printf("\nINICIO DE PRUEBAS LISTA TOPE\n");
 
@@ -138,16 +160,15 @@ void pruebas_lista_tope(){
     prueba("Se inserta un elemento a la lista", lista_apilar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
     prueba("El tope de la pila es el elemento que apile", lista_tope(lista) == &b);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_apilar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
     prueba("El tope de la pila es el elemento que apile", lista_tope(lista) == &c);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_desapilar*/
 void pruebas_lista_desapilar(){
     printf("\nINICIO DE PRUEBAS LISTA DESAPILAR\n");
 
@@ -162,25 +183,23 @@ void pruebas_lista_desapilar(){
 
     prueba("Se apila un elemento a la lista", lista_apilar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se apila un elemento a la lista", lista_apilar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
     prueba("La lista esta vacia", lista_vacia(lista));
+    
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_borrar*/
 void pruebas_lista_borrar(){
     printf("\nINICIO DE PRUEBAS LISTA BORRAR\n");
 
@@ -195,15 +214,12 @@ void pruebas_lista_borrar(){
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
@@ -211,9 +227,11 @@ void pruebas_lista_borrar(){
 
     prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
     prueba("La lista esta vacia", lista_vacia(lista));
+    
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_elemento_en_posicion*/
 void pruebas_lista_elemento_en_posicion(){
     printf("\nINICIO DE PRUEBAS LISTA ELEMENTO EN POSICION\n");
 
@@ -230,21 +248,21 @@ void pruebas_lista_elemento_en_posicion(){
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
     prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
     prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
     prueba("No hay elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == NULL);
     prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
     prueba("La lista no esta vacia", !lista_vacia(lista));
+    
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_borrar_de_posicion*/
 void pruebas_lista_borrar_de_posicion(){
     printf("\nINICIO DE PRUEBAS LISTA BORRAR ELEMENTO EN POSICION\n");
 
@@ -261,17 +279,14 @@ void pruebas_lista_borrar_de_posicion(){
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
     prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
     prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
     prueba("Elemento en posicion 3", lista_elemento_en_posicion(lista, 3) == &d);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se borra un elemento en la posicion 0 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
     prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
@@ -288,9 +303,11 @@ void pruebas_lista_borrar_de_posicion(){
 
     prueba("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
     prueba("La lista quedo vacia", lista_vacia(lista));
+    
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_encolar*/
 void pruebas_lista_encolar(){
     printf("\nINICIO DE PRUEBAS LISTA ENCOLAR\n");
 
@@ -305,11 +322,9 @@ void pruebas_lista_encolar(){
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
 
     prueba("El ultio elemento que se inserto es el primero", lista_elemento_en_posicion(lista, 0) == &c);
@@ -319,6 +334,7 @@ void pruebas_lista_encolar(){
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_primero*/
 void pruebas_lista_primero(){
     printf("\nINICIO DE PRUEBAS LISTA PRIMERO\n");
 
@@ -330,13 +346,14 @@ void pruebas_lista_primero(){
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &a) == 0);
     prueba("Primer elemento de la lista", lista_primero(lista) == &a);
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
-     prueba("Primer elemento de la lista", lista_primero(lista) == &b);
+    prueba("Primer elemento de la lista", lista_primero(lista) == &b);
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
-     prueba("Primer elemento de la lista", lista_primero(lista) == &c);
+    prueba("Primer elemento de la lista", lista_primero(lista) == &c);
 
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_desencolar*/
 void pruebas_lista_desencolar(){
     printf("\nINICIO DE PRUEBAS LISTA DESENCOLAR\n");
 
@@ -353,17 +370,14 @@ void pruebas_lista_desencolar(){
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
     prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
     prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &c);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &d) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
     prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &d);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se desenencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 3);
@@ -380,6 +394,7 @@ void pruebas_lista_desencolar(){
     lista_destruir(lista);
 }
 
+/*Prueba para funcion lista_ultimo*/
 void pruebas_lista_ultimo(){
     printf("\nINICIO DE PRUEBAS LISTA ULTIMO\n");
 
@@ -398,11 +413,11 @@ void pruebas_lista_ultimo(){
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
     prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
     prueba("El ultimo elemento de la lista es el que inserte", lista_ultimo(lista) == &b);
-    prueba("La lista no esta vacia", !lista_vacia(lista));
 
     lista_destruir(lista);
 }
 
+/*Prueba de volumen*/
 void pruebas_lista_volumen() {
     printf("\nINICIO DE PRUEBAS LISTA VOLUMEN\n");
 
@@ -423,7 +438,7 @@ void pruebas_lista_volumen() {
 int main(){
    pruebas_lista_crear();
    pruebas_lista_insertar();
-   pruebas_lista_insertar_en_posisicion();
+   pruebas_lista_insertar_en_posicion();
    pruebas_lista_vacia();
    pruebas_lista_elementos();
    pruebas_lista_apilar();
