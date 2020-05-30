@@ -14,7 +14,7 @@ Siguiendo este modelo:
   Inicio                                  Fin
 ````
 
-Dentro de este TDA se incluye la implementacion de algunas funciones de los TDA `pila` y `cola`
+Dentro de este TDA se incluye la implementacion de algunas funciones de los TDA `pila` y `cola`.
 
 ---
 ## ¿Cómo compilar ?
