@@ -89,10 +89,10 @@ void pruebas_lista_insertar_en_posicion(){
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
 
     prueba("Se inserta un elemento en la lista", lista_insertar_en_posicion(lista, &d, 0) == 0);
-    prueba("Nuevo elemento en pos 0", lista_elemento_en_posicion(lista, 0) == &d);
-    prueba("Nuevo elemento en pos 1", lista_elemento_en_posicion(lista, 1) == &a);
-    prueba("Nuevo elemento en pos 2", lista_elemento_en_posicion(lista, 2) == &b);
-    prueba("Nuevo elemento en pos 3", lista_elemento_en_posicion(lista, 3) == &c);
+    prueba("Nuevo elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &d);
+    prueba("Nuevo elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &a);
+    prueba("Nuevo elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &b);
+    prueba("Nuevo elemento en posicion 3", lista_elemento_en_posicion(lista, 3) == &c);
 
     lista_destruir(lista);
 }
@@ -254,16 +254,16 @@ void pruebas_lista_elemento_en_posicion(){
     /* Inicio de pruebas */
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    prueba("Elemento en posicion 0 coincide con el que inserte", lista_elemento_en_posicion(lista, 0) == &a);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("Elemento en posicion 1 coincide con el que inserte", lista_elemento_en_posicion(lista, 1) == &b);
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("Elemento en posicion 2 coincide con el que inserte", lista_elemento_en_posicion(lista, 2) == &c);
 
     prueba("Se borra un elemento a la lista", lista_borrar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
@@ -285,27 +285,27 @@ void pruebas_lista_borrar_de_posicion(){
     /* Inicio de pruebas */
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
-    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    prueba("Elemento en posicion 0 coincide con el que inserte", lista_elemento_en_posicion(lista, 0) == &a);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("Elemento en posicion 1 coincide con el que inserte", lista_elemento_en_posicion(lista, 1) == &b);
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("Elemento en posicion 2 coincide con el que inserte", lista_elemento_en_posicion(lista, 2) == &c);
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    prueba("Elemento en posicion 3", lista_elemento_en_posicion(lista, 3) == &d);
+    prueba("Elemento en posicion 3 coincide con el que inserte", lista_elemento_en_posicion(lista, 3) == &d);
 
-    prueba("Se borra un elemento en la posicion 0 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
-    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
+    prueba("Se borra un elemento de la posicion 0 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
+    prueba("Nuevo elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    prueba("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
-    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &d);
+    prueba("Se borra un elemento de la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
+    prueba("Nuevo elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &d);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 1) == 0);
@@ -313,7 +313,7 @@ void pruebas_lista_borrar_de_posicion(){
     prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &b);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    prueba("Se borra un elemento en la posicion 1 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
+    prueba("Se borra un elemento en la posicion 0 de la lista", lista_borrar_de_posicion(lista, 0) == 0);
     prueba("La lista quedo vacia", lista_vacia(lista));
     
     lista_destruir(lista);
@@ -391,18 +391,18 @@ void pruebas_lista_desencolar(){
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 3);
 
-    prueba("Primer elemento", lista_primero(lista) == &b);
-    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &c);
-    prueba("Tercer elemento", lista_elemento_en_posicion(lista, 2) == &d);
+    prueba("Cambia el primer elemento", lista_primero(lista) == &b);
+    prueba("Cambia el segundo elemento", lista_elemento_en_posicion(lista, 1) == &c);
+    prueba("Cambia el tercer elemento", lista_elemento_en_posicion(lista, 2) == &d);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
-    prueba("Primer elemento", lista_primero(lista) == &c);
-    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &d);
+    prueba("Cambia el primer elemento", lista_primero(lista) == &c);
+    prueba("Cambia el segundo elemento", lista_elemento_en_posicion(lista, 1) == &d);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
-    prueba("Primer elemento", lista_primero(lista) == &d);
+    prueba("Cambia el primer elemento", lista_primero(lista) == &d);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista esta vacia", lista_vacia(lista));
@@ -422,12 +422,12 @@ void pruebas_lista_ultimo(){
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &a) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
     prueba("El ultimo elemento de la lista es el que inserte", lista_ultimo(lista) == &a);
-    prueba("Elemento en posicion 0", lista_elemento_en_posicion(lista, 0) == &a);
+    prueba("Elemento en posicion 0 coincide con el elemento que inserte", lista_elemento_en_posicion(lista, 0) == &a);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("Elemento en posicion 1 coincide con el elemento que inserte", lista_elemento_en_posicion(lista, 1) == &b);
     prueba("El ultimo elemento de la lista es el que inserte", lista_ultimo(lista) == &b);
 
     lista_destruir(lista);
@@ -447,6 +447,11 @@ void pruebas_lista_volumen() {
 
     prueba("La lista no esta vacia", !lista_vacia(lista));
     prueba("La lista tiene 25 elementos", lista_elementos(lista) == 25);
+
+    for (size_t i = 0; i < 25; i++){
+        printf("Elemento %li: ", i);
+        prueba("Esta en la posicion que lo inserte", lista_elemento_en_posicion(lista, i) == &i);
+    }
 
     lista_destruir(lista);
 }
@@ -471,7 +476,7 @@ void prueba_iterador_interno(){
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &b) == 0);
 
     int contador=0;
-    printf("Imprimo la lista usando el iterador interno: \n");
+    printf("Sumo la lista usando el iterador interno: \n");
     lista_con_cada_elemento(lista, sumar_elemento, (void*)&contador);
 
     prueba("La suma de los elementos dio la cantidad correcta", contador == 3);
