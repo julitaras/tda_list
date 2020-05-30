@@ -128,7 +128,9 @@ int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion){
             *siguiente_nodo_viejo = nodo_nuevo;
         }else{
             (*siguiente_nodo_viejo)->siguiente = nodo_nuevo;
-            lista->fin = nodo_nuevo;
+            if(posicion == lista_elementos(lista)){
+                lista->fin = nodo_nuevo;
+            }
         }
     }
 

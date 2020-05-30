@@ -54,7 +54,7 @@ void pruebas_lista_insertar(){
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &c) == 0);
-    prueba("El tercer elemento que ingrese esta en la posicion 2", lista_elemento_en_posicion(lista, 0) == &c);
+    prueba("El tercer elemento que ingrese esta en la posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
 
     prueba("Se inserta un elemento a la lista", lista_insertar(lista, &d) == 0);
@@ -70,7 +70,7 @@ void pruebas_lista_insertar_en_posicion(){
 
     /* Declaro las variables a utilizar*/
     lista_t* lista = lista_crear();
-    int a = 1, b = 2, c = 3;
+    int a = 1, b = 2, c = 3, d = 4;
 
     /* Inicio de pruebas */
     prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &a, 0) == 0);
@@ -79,13 +79,19 @@ void pruebas_lista_insertar_en_posicion(){
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
-    prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &b, 1) == 0);
-    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("Se inserta un elemento en la lista", lista_insertar_en_posicion(lista, &c, 100) == 0);
+    prueba("Se inserto en la posicion 1", lista_elemento_en_posicion(lista, 1) == &c);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
 
-    prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &c, 2) == 0);
-    prueba("Elemento en posicion 2", lista_elemento_en_posicion(lista, 2) == &c);
+    prueba("Se inserta un elemento a la lista", lista_insertar_en_posicion(lista, &b, 1) == 0);
+    prueba("Elemento en posicion 1", lista_elemento_en_posicion(lista, 1) == &b);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+
+    prueba("Se inserta un elemento en la lista", lista_insertar_en_posicion(lista, &d, 0) == 0);
+    prueba("Nuevo elemento en pos 0", lista_elemento_en_posicion(lista, 0) == &d);
+    prueba("Nuevo elemento en pos 1", lista_elemento_en_posicion(lista, 1) == &a);
+    prueba("Nuevo elemento en pos 2", lista_elemento_en_posicion(lista, 2) == &b);
+    prueba("Nuevo elemento en pos 3", lista_elemento_en_posicion(lista, 3) == &c);
 
     lista_destruir(lista);
 }
