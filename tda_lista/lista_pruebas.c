@@ -5,6 +5,7 @@
 #define COLOR_ROJO	   "\x1b[1m\x1b[31m"
 #define COLOR_VERDE   "\x1b[1m\x1b[32m"
 #define COLOR_NORMAL   "\x1b[0m"
+#define COLOR_VIOLETA "\x1b[35;1m"
 
 /*Funcion prueba, recibe el mensaje a dar 
 * y si el resultado esta bien o mal. 
@@ -385,13 +386,22 @@ void pruebas_lista_desencolar(){
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
     prueba("Primer elemento", lista_primero(lista) == &d);
 
+    printf("La lista queda: \n");
+    for(size_t i=0;i<lista_elementos(lista);i++){
+        printf(COLOR_VIOLETA "%i ", *(int*)lista_elemento_en_posicion(lista, i));
+    }
+    printf("\n");
+    
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 3);
     prueba("Primer elemento", lista_primero(lista) == &c);
+    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &b);
+    prueba("Tercer elemento", lista_elemento_en_posicion(lista, 2) == &a);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
     prueba("Primer elemento", lista_primero(lista) == &b);
+    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &a);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
@@ -446,10 +456,10 @@ void pruebas_lista_volumen() {
 
 void sumar_elemento(void* elemento, void* contador){
   if(elemento && contador){
-    printf("Elemento: %i \n", *(int*)elemento);
+    printf(COLOR_VIOLETA "Elemento: %i \n", *(int*)elemento);
 
     (*(int*)contador) = (*(int*)contador) + *(int*)elemento;
-    printf("Suma hasta el momento: %i \n", *(int*)contador);
+    printf(COLOR_VIOLETA "Suma hasta el momento: %i \n", *(int*)contador);
   }
 }
 
