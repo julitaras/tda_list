@@ -390,11 +390,7 @@ void pruebas_lista_desencolar(){
     
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 3);
-    printf("La lista queda: \n");
-    for(size_t i=0;i<lista_elementos(lista);i++){
-        printf(COLOR_VIOLETA "%i ", *(int*)lista_elemento_en_posicion(lista, i));
-    }
-    printf("\n");
+
     prueba("Primer elemento", lista_primero(lista) == &b);
     prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &c);
     prueba("Tercer elemento", lista_elemento_en_posicion(lista, 2) == &d);
