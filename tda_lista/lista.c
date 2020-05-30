@@ -295,6 +295,10 @@ void lista_destruir(lista_t* lista){
 
 lista_iterador_t* lista_iterador_crear(lista_t* lista){
 
+    if(!lista){
+        return NULL;
+    }
+    
     lista_iterador_t* it = calloc(1, sizeof(lista_iterador_t));
 
     if(!it){
@@ -303,8 +307,7 @@ lista_iterador_t* lista_iterador_crear(lista_t* lista){
 
     it->anterior = NULL;
 	it->actual = lista->inicio;
-	return it;
-   
+	return it;   
 }
 
 void lista_iterador_destruir(lista_iterador_t* iterador){
@@ -335,6 +338,9 @@ void* lista_iterador_siguiente(lista_iterador_t* iterador){
 }
 
 void lista_con_cada_elemento(lista_t* lista, void (*funcion)(void*, void*), void *contexto){
+    if (!lista){
+        return;
+    }
 
     for (size_t i = 0; i < lista_elementos(lista); i++){
         funcion(lista_elemento_en_posicion(lista, i), contexto);
