@@ -55,6 +55,8 @@ Ejecutamos el mismo haciendo:
 
     Ambos se encargan de iterar, solo que lo hacen de forma distinta. Siendo que el iterador interno delega la iteracion a la lista, mientras que el externo se encarga el.
 
+    El iterador interno con cada elemento de la lista, llama a una funcion.
+
 ---
 
 ## Enunciado
