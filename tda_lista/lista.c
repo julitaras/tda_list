@@ -276,7 +276,7 @@ int lista_encolar(lista_t* lista, void* elemento){
         return -1;
     }
 
-    return lista_insertar_en_posicion(lista, elemento, 0);
+    return lista_insertar(lista, elemento);
 }
 
 int lista_desencolar(lista_t* lista){

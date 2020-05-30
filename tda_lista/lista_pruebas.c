@@ -186,19 +186,24 @@ void pruebas_lista_desapilar(){
     /* Inicio de pruebas */
     prueba("Se inserta un elemento a la lista", lista_apilar(lista, &a) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 1);
+    prueba("El tope de la pila es el elemento que apile", lista_tope(lista) == &a);
     prueba("La lista no esta vacia", !lista_vacia(lista));
 
     prueba("Se apila un elemento a la lista", lista_apilar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
+    prueba("El tope de la pila es el elemento que apile", lista_tope(lista) == &b);
 
     prueba("Se apila un elemento a la lista", lista_apilar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
+    prueba("El tope de la pila es el elemento que apile", lista_tope(lista) == &c);
 
     prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
+    prueba("El tope de la pila cambio", lista_tope(lista) == &b);
 
     prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
+    prueba("El tope de la pila cambio", lista_tope(lista) == &a);
 
     prueba("Se desapila un elemento a la lista", lista_desapilar(lista) == 0);
     prueba("La lista esta vacia", lista_vacia(lista));
@@ -333,11 +338,6 @@ void pruebas_lista_encolar(){
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
 
-
-    prueba("El ultio elemento que se inserto es el primero", lista_elemento_en_posicion(lista, 0) == &c);
-    prueba("El elemento que se inserto en el medio esta en el medio", lista_elemento_en_posicion(lista, 1) == &b);
-    prueba("El primer elemento que se inserto es el ultimo", lista_elemento_en_posicion(lista, 2) == &a);
-  
     lista_destruir(lista);
 }
 
@@ -353,9 +353,8 @@ void pruebas_lista_primero(){
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &a) == 0);
     prueba("Primer elemento de la lista", lista_primero(lista) == &a);
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
-    prueba("Primer elemento de la lista", lista_primero(lista) == &b);
+    prueba("El primer elemento sigue siendo el primero", lista_primero(lista) == &a);
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
-    prueba("Primer elemento de la lista", lista_primero(lista) == &c);
 
     lista_destruir(lista);
 }
@@ -376,15 +375,12 @@ void pruebas_lista_desencolar(){
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &b) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 2);
-    prueba("Primer elemento", lista_primero(lista) == &b);
-
+  
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &c) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 3);
-    prueba("Primer elemento", lista_primero(lista) == &c);
 
     prueba("Se encola un elemento a la lista", lista_encolar(lista, &d) == 0);
     prueba("La lista tiene un elemento mas", lista_elementos(lista) == 4);
-    prueba("Primer elemento", lista_primero(lista) == &d);
 
     printf("La lista queda: \n");
     for(size_t i=0;i<lista_elementos(lista);i++){
@@ -394,18 +390,23 @@ void pruebas_lista_desencolar(){
     
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 3);
-    prueba("Primer elemento", lista_primero(lista) == &c);
-    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &b);
-    prueba("Tercer elemento", lista_elemento_en_posicion(lista, 2) == &a);
+    printf("La lista queda: \n");
+    for(size_t i=0;i<lista_elementos(lista);i++){
+        printf(COLOR_VIOLETA "%i ", *(int*)lista_elemento_en_posicion(lista, i));
+    }
+    printf("\n");
+    prueba("Primer elemento", lista_primero(lista) == &b);
+    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &c);
+    prueba("Tercer elemento", lista_elemento_en_posicion(lista, 2) == &d);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 2);
-    prueba("Primer elemento", lista_primero(lista) == &b);
-    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &a);
+    prueba("Primer elemento", lista_primero(lista) == &c);
+    prueba("Segundo elemento", lista_elemento_en_posicion(lista, 1) == &d);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista tiene un elemento menos", lista_elementos(lista) == 1);
-    prueba("Primer elemento", lista_primero(lista) == &a);
+    prueba("Primer elemento", lista_primero(lista) == &d);
 
     prueba("Se desencola un elemento a la lista", lista_desencolar(lista) == 0);
     prueba("La lista esta vacia", lista_vacia(lista));
@@ -478,6 +479,8 @@ void prueba_iterador_interno(){
     lista_con_cada_elemento(lista, sumar_elemento, (void*)&contador);
 
     prueba("La suma de los elementos dio la cantidad correcta", contador == 3);
+
+    lista_destruir(lista);
 }
 
 void prueba_iterador_externo(){
